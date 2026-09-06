@@ -100,3 +100,15 @@ https://cyanstella.github.io/GLAMOURLOOKBOOK/
 FINAL FANTASY XIV に関する権利は各権利者に帰属します。
 
 (C) SQUARE ENIX
+
+
+## Ver1.01 公開前修正（fix1）
+
+PNG書き出し時の以下を修正しました。
+
+- ひとこと欄の枠線をCanvas内側に描画し、線が外側へはみ出して見える問題を修正
+- STYLE TAGの背面に白い抜きを入れ、枠線との重なりを整理
+- STYLE TAG文字を通常のCanvas `fillText` で描画
+- CUTE / COOL / ELEGANT / CASUAL / FANTASY がタグ内に収まるよう文字サイズを自動調整
+
+サイト内のバージョン表記は **Ver1.01のまま**です。

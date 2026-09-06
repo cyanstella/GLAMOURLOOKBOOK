@@ -1209,24 +1209,46 @@ async function renderMagazineCanvas() {
   const boxW = pxX(55.5);
   const boxH = pxY(8.4);
 
-  // 1px程度のシンプルな枠
+  // 線幅の半分だけ内側へ入れて、PNG上で枠線が外へはみ出さないようにする。
+  const frameInset = 1;
   ctx.strokeStyle = "#929292";
   ctx.lineWidth = 1.5;
-  ctx.strokeRect(boxX, boxY, boxW, boxH);
+  ctx.strokeRect(
+    boxX + frameInset,
+    boxY + frameInset,
+    boxW - frameInset * 2,
+    boxH - frameInset * 2
+  );
 
-  // 枠線の上にSTYLE TAGを重ねる
+  // STYLE TAGの背面だけ白で抜き、上辺の枠線がタグからはみ出して見えないようにする。
+  const tagKnockout = 4;
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(
+    tagX - tagKnockout,
+    tagY - tagKnockout,
+    tagW + tagKnockout * 2,
+    tagH + tagKnockout * 2
+  );
+
+  // STYLE TAG本体
   ctx.fillStyle = "#111111";
   ctx.fillRect(tagX, tagY, tagW, tagH);
-  drawCompressedText(
-    ctx,
-    tag,
-    tagX + tagW / 2,
-    tagY + tagH / 2 + 1,
-    '900 27px "Arial Narrow", Arial, sans-serif',
-    "#ffffff",
-    0.68,
-    "center"
-  );
+
+  // 圧縮描画ではなく通常のfillTextで確実に白文字を中央表示する。
+  ctx.save();
+  ctx.fillStyle = "#ffffff";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  let tagFontSize = 22;
+  do {
+    ctx.font = `900 ${tagFontSize}px Arial, sans-serif`;
+    if (ctx.measureText(tag).width <= tagW - 12 || tagFontSize <= 13) break;
+    tagFontSize -= 1;
+  } while (tagFontSize > 13);
+
+  ctx.fillText(tag, tagX + tagW / 2, tagY + tagH / 2 + 1);
+  ctx.restore();
 
   const comment = catchInput.value || "";
   if (comment) {
