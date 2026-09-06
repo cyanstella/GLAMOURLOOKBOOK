@@ -1185,13 +1185,6 @@ async function renderMagazineCanvas() {
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, OUTPUT_W, OUTPUT_H);
 
-  // STYLE TAGは「ひとこと枠」の左上に重ねる
-  const tag = getSelectedStyleTag();
-  const tagW = 88;
-  const tagH = 36;
-  const tagX = pxX(4.15);
-  const tagY = pxY(6.5) - tagH / 2;
-
   // Magazine logo
   const logoRight = OUTPUT_W - pxX(3.1);
   ctx.textAlign = "right";
@@ -1208,6 +1201,20 @@ async function renderMagazineCanvas() {
   const boxY = pxY(6.5);
   const boxW = pxX(55.5);
   const boxH = pxY(8.4);
+
+  // STYLE TAGは枠の「左上」に完全に重ねる。
+  // ラベル名に応じて横幅を可変にし、ELEGANT等も欠けないようにする。
+  const tag = getSelectedStyleTag();
+  const tagH = 36;
+
+  ctx.save();
+  ctx.font = '900 22px Arial, "Arial Narrow", sans-serif';
+  const measuredTagW = Math.ceil(ctx.measureText(tag).width);
+  ctx.restore();
+
+  const tagW = Math.max(88, Math.min(170, measuredTagW + 24));
+  const tagX = boxX;
+  const tagY = boxY - tagH / 2;
 
   // 線幅の半分だけ内側へ入れて、PNG上で枠線が外へはみ出さないようにする。
   const frameInset = 1;
@@ -1234,20 +1241,22 @@ async function renderMagazineCanvas() {
   ctx.fillStyle = "#111111";
   ctx.fillRect(tagX, tagY, tagW, tagH);
 
-  // 圧縮描画ではなく通常のfillTextで確実に白文字を中央表示する。
+  // タグ内だけにクリップした上で、白文字を中央に描画。
+  // maxWidthも指定して、長いSTYLE TAGでも必ず黒帯内に収める。
   ctx.save();
+  ctx.beginPath();
+  ctx.rect(tagX, tagY, tagW, tagH);
+  ctx.clip();
   ctx.fillStyle = "#ffffff";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-
-  let tagFontSize = 22;
-  do {
-    ctx.font = `900 ${tagFontSize}px Arial, sans-serif`;
-    if (ctx.measureText(tag).width <= tagW - 12 || tagFontSize <= 13) break;
-    tagFontSize -= 1;
-  } while (tagFontSize > 13);
-
-  ctx.fillText(tag, tagX + tagW / 2, tagY + tagH / 2 + 1);
+  ctx.font = '900 22px Arial, "Arial Narrow", sans-serif';
+  ctx.fillText(
+    tag,
+    tagX + tagW / 2,
+    tagY + tagH / 2 + 1,
+    tagW - 16
+  );
   ctx.restore();
 
   const comment = catchInput.value || "";
