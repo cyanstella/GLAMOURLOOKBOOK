@@ -138,3 +138,15 @@ PNG書き出し画像で、ひとこと欄の上辺の枠線が `LOOKBOOK` の `
 - ブラウザプレビュー側と PNG 書き出し側の両方を同じ幅に調整
 
 サイト内バージョン表記は **Ver1.01のまま**です。
+
+
+## Ver1.01 公開前修正（fix4）
+
+Cloudflare Web Analytics を追加しました。
+
+- EORZEA PROFILE STUDIO リンクページと同じトークンを使用
+- `index.html` の `script.js` 読み込み後、`</body>` の直前に設置
+- 使用トークン:
+  `44c50f6a2f0843fda8bf40e7f4a92493`
+
+サイト内バージョン表記は **Ver1.01のまま**です。
