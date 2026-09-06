@@ -1199,7 +1199,7 @@ async function renderMagazineCanvas() {
   // Comment frame
   const boxX = pxX(3.2);
   const boxY = pxY(6.5);
-  const boxW = pxX(55.5);
+  const boxW = pxX(52.0);
   const boxH = pxY(8.4);
 
   // STYLE TAGは枠の「左上」に完全に重ねる。
