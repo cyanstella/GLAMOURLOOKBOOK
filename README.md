@@ -150,3 +150,22 @@ Cloudflare Web Analytics を追加しました。
   `44c50f6a2f0843fda8bf40e7f4a92493`
 
 サイト内バージョン表記は **Ver1.01のまま**です。
+
+
+## Ver1.01 公開前修正（fix5）
+
+XIVAPI v2 の装備検索で HTTP 400 が発生していたため、装備部位の検索条件を修正しました。
+
+変更前:
+- `EquipSlotCategory.Head=1`
+- `EquipSlotCategory.Ears=1`
+- など
+
+変更後:
+- `EquipSlotCategory.Head=true`
+- `EquipSlotCategory.Ears=true`
+- など
+
+武器の `MainHand / OffHand` 条件も同様に `=true` へ変更しています。
+
+Cloudflare Web Analytics、既存レイアウト、Ver1.01表記など、その他の仕様は変更していません。

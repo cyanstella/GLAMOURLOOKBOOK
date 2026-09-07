@@ -783,8 +783,8 @@ async function searchEquipment(slotKey, queryText) {
   const nameClause = `+${nameField}~"${escapeSearchValue(query)}"`;
 
   const slotClause = slot.apiFields.length === 1
-    ? `+EquipSlotCategory.${slot.apiFields[0]}=1`
-    : `+(${slot.apiFields.map((field) => `EquipSlotCategory.${field}=1`).join(" ")})`;
+    ? `+EquipSlotCategory.${slot.apiFields[0]}=true`
+    : `+(${slot.apiFields.map((field) => `EquipSlotCategory.${field}=true`).join(" ")})`;
 
   const searchQuery = `${nameClause} ${slotClause}`;
   const fields = "Name,Icon";
