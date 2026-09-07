@@ -274,14 +274,14 @@ const EQUIPMENT_SLOTS = [
   { key: "earrings",  preview: "EARRINGS",  ja: "耳",     en: "EARRINGS",  apiFields: ["Ears"] },
   { key: "necklace",  preview: "NECKLACE",  ja: "首",     en: "NECKLACE",  apiFields: ["Neck"] },
   { key: "bracelets", preview: "BRACELETS", ja: "腕",     en: "BRACELETS", apiFields: ["Wrists"] },
-  { key: "ring1",     preview: "RING 1",    ja: "指輪1",  en: "RING 1",    apiFields: ["Finger"] },
-  { key: "ring2",     preview: "RING 2",    ja: "指輪2",  en: "RING 2",    apiFields: ["Finger"] },
+  { key: "ring1",     preview: "RING 1",    ja: "指輪1",  en: "RING 1",    apiFields: ["FingerL"] },
+  { key: "ring2",     preview: "RING 2",    ja: "指輪2",  en: "RING 2",    apiFields: ["FingerR"] },
   { key: "weapon",    preview: "WEAPON",    ja: "武器",   en: "WEAPON",    apiFields: ["MainHand", "OffHand"] }
 ];
 
 const SLOT_FIELD_NAMES = [
   "MainHand", "OffHand", "Head", "Body", "Gloves",
-  "Legs", "Feet", "Ears", "Neck", "Wrists", "Finger"
+  "Legs", "Feet", "Ears", "Neck", "Wrists", "FingerL", "FingerR"
 ];
 
 const equipmentState = Object.fromEntries(

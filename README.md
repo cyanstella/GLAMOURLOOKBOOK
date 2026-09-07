@@ -169,3 +169,20 @@ XIVAPI v2 の装備検索で HTTP 400 が発生していたため、装備部位
 武器の `MainHand / OffHand` 条件も同様に `=true` へ変更しています。
 
 Cloudflare Web Analytics、既存レイアウト、Ver1.01表記など、その他の仕様は変更していません。
+
+
+## Ver1.01 公開前修正（fix6）
+
+指輪1 / 指輪2だけXIVAPI v2検索がHTTP 400になる問題を修正しました。
+
+原因:
+`EquipSlotCategory` の指輪スロット名は `Finger` ではなく、
+`FingerL` / `FingerR` です。
+
+変更:
+- 指輪1 → `EquipSlotCategory.FingerL=true`
+- 指輪2 → `EquipSlotCategory.FingerR=true`
+
+その他の装備検索、Cloudflare Web Analytics、レイアウト、PNG書き出し等は変更していません。
+
+サイト内バージョン表記は **Ver1.01のまま**です。
